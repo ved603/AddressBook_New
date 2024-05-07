@@ -21,6 +21,9 @@ public class AddressBook {
             contacts.add(con);
             System.out.println(con);
         }
+        Contact con = new Contact(firstname,lastname,address,city,state,zip,phoneno,email);
+        contacts.add(con);
+        System.out.println(con);
     }
 
 
@@ -35,6 +38,10 @@ public class AddressBook {
                 System.out.print("\nEnter your choice : ");
                 String choice = sc.nextLine();
                 System.out.println();
+
+                System.out.print("\nEnter your choice : \n");
+                String choice = sc.nextLine();
+
                 switch (choice){
                     case "1":
                         System.out.print("Enter your First Name : ");
@@ -162,6 +169,7 @@ public class AddressBook {
         Main m = new Main();
         Boolean running = true;
         while(running) {
+
             System.out.println("\n____________________________________________________");
             System.out.println("\nSelect an Operation\n");
             System.out.println("______________________________________________________\n");
@@ -169,6 +177,11 @@ public class AddressBook {
             System.out.print("\nEnter your choice : ");
             String choice = sc.nextLine();
             System.out.println("\n_______________________________________________________\n");
+
+            System.out.println("\nSelect an Operation\n");
+            System.out.println("1. Add contact \n2. Edit Contact \n3. View Contact \n4. Delete Contact \n5. <- Back ");
+            System.out.print("\nEnter your choice : \n");
+            String choice = sc.nextLine();
 
             switch (choice) {
                 case "1":
@@ -222,4 +235,3 @@ public class AddressBook {
         }
     }
 }
-
