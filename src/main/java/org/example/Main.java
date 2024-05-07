@@ -124,7 +124,6 @@ class Main {
     public void delete(){
         System.out.println("Enter the FirstName to search : ");
         String name = sc.nextLine();
-        System.out.println("The Size of the List After deletion is : " +contacts.size());
         int flag = 0;
         for(int i=0;i<contacts.size();i++){
             if(contacts.get(i).getFirstname().equals(name)){
@@ -132,13 +131,18 @@ class Main {
             }
         }
         contacts.remove(flag);
-        System.out.println("Data deleted Successfully");
-        System.out.println("The Size of the List After deletion is : " +contacts.size());
+        System.out.println("\nData deleted Successfully");
+
     }
     public void View(){
-       for(int i=0;i< contacts.size();i++){
-           System.out.println(contacts.get(i));
-       }
+        if(contacts.isEmpty()){
+            System.out.println("\nData is Not available ");
+        }
+        else {
+            for (int i = 0; i < contacts.size(); i++) {
+                System.out.println(contacts.get(i));
+            }
+        }
     }
     public static void main(String[] args) {
         Main m = new Main();
@@ -150,27 +154,32 @@ class Main {
             String choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                    System.out.println("\n_________________________________________________");
-                    System.out.println("\n\t\t*****  Fill the Details  *****");
-                    System.out.println("\n_________________________________________________\n");
-                    System.out.print("Enter your First Name : ");
-                    String firstname = sc.nextLine();
-                    System.out.print("Enter your Last Name : ");
-                    String lastname = sc.nextLine();
-                    System.out.print("Enter your address : ");
-                    String address = sc.nextLine();
-                    System.out.print("Enter your city : ");
-                    String city = sc.nextLine();
-                    System.out.print("Enter your state : ");
-                    String state = sc.nextLine();
-                    System.out.print("Enter your Zip Code : ");
-                    String zip = sc.nextLine();
-                    System.out.print("Enter your Phone number : ");
-                    String phoneno = sc.nextLine();
-                    System.out.print("Enter your email : ");
-                    String email = sc.nextLine();
-                    System.out.println("\n_________________________________________________\n");
-                    m.add_Contact(firstname, lastname, address, city, state, zip, phoneno, email);
+                    System.out.println("Enter How Many contacts You want to insert : ");
+                    int a = sc.nextInt();
+                    sc.nextLine(); // to fix the issue of nextline to not skip the next arguments.
+                    for(int i=0; i<a;i++) {
+                        System.out.println("\n_________________________________________________");
+                        System.out.println("\n\t\t*****  Fill the Details  *****");
+                        System.out.println("\n_________________________________________________\n");
+                        System.out.print("Enter your First Name : ");
+                        String firstname = sc.nextLine();
+                        System.out.print("Enter your Last Name : ");
+                        String lastname = sc.nextLine();
+                        System.out.print("Enter your address : ");
+                        String address = sc.nextLine();
+                        System.out.print("Enter your city : ");
+                        String city = sc.nextLine();
+                        System.out.print("Enter your state : ");
+                        String state = sc.nextLine();
+                        System.out.print("Enter your Zip Code : ");
+                        String zip = sc.nextLine();
+                        System.out.print("Enter your Phone number : ");
+                        String phoneno = sc.nextLine();
+                        System.out.print("Enter your email : ");
+                        String email = sc.nextLine();
+                        System.out.println("\n_________________________________________________\n");
+                        m.add_Contact(firstname, lastname, address, city, state, zip, phoneno, email);
+                    }
                     break;
 
 
