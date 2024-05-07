@@ -120,6 +120,21 @@ class Main {
         }
     }
 
+
+    public void delete(){
+        System.out.println("Enter the FirstName to search : ");
+        String name = sc.nextLine();
+        System.out.println("The Size of the List After deletion is : " +contacts.size());
+        int flag = 0;
+        for(int i=0;i<contacts.size();i++){
+            if(contacts.get(i).getFirstname().equals(name)){
+                flag = i;
+            }
+        }
+        contacts.remove(flag);
+        System.out.println("Data deleted Successfully");
+        System.out.println("The Size of the List After deletion is : " +contacts.size());
+    }
     public void View(){
        for(int i=0;i< contacts.size();i++){
            System.out.println(contacts.get(i));
@@ -130,7 +145,7 @@ class Main {
         Boolean running = true;
         while(running) {
             System.out.println("Select an Operation");
-            System.out.println("1. Add contact \n2. Edit Contact \n3. View Contact");
+            System.out.println("1. Add contact \n2. Edit Contact \n3. View Contact \n4. Delete Contact");
             System.out.print("\nEnter your choice : ");
             String choice = sc.nextLine();
             switch (choice) {
@@ -165,6 +180,10 @@ class Main {
 
                 case "3":
                     m.View();
+                    break;
+
+                case "4":
+                    m.delete();
                     break;
             }
         }
