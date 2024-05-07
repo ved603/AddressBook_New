@@ -8,9 +8,12 @@ import java.util.Scanner;
 import static org.example.Main.*;
 
 public class AddressBook {
-    static HashMap<String, ArrayList<Contact>> books = new HashMap<>();
     ArrayList<Contact> contacts = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
+
+    public ArrayList<Contact> getContacts() {
+        return contacts;
+    }
     public void add_Contact(String firstname, String lastname, String address, String city, String state, String zip, String phoneno, String email){
         boolean isPresent = contacts.stream().anyMatch(num -> num.getFirstname().equals(firstname));
         if(isPresent){
