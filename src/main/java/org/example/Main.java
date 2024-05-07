@@ -61,7 +61,9 @@ class Main {
         System.out.println("\n______________________________________________");
         boolean res = true;
         while(res) {
+
             System.out.println("\n1. Add New AddressBook \n2. Perform Operation in AddressBook  \n3. Search by city \n4. Print Available AddressBooks \n5. Exist");
+
             System.out.print("\nEnter your choice : ");
             String flag = sc.nextLine();
             switch (flag) {
@@ -100,6 +102,7 @@ class Main {
                             break;
                     }
                     break;
+
 
                 case "4":
                     System.out.println("\nPrinting the Names of AddressBooks : " +books.keySet());
