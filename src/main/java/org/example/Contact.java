@@ -44,6 +44,38 @@ public class Contact{
         return email;
     }
 
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     Contact(String fname, String lastname, String address, String city, String state, String zip, String phoneno, String email){
             if(fname != null) {
                 this.firstname = fname;
@@ -81,6 +113,7 @@ public class Contact{
 
         @Override
         public String toString(){
+            System.out.println("\n_________________________________________________\n");
             System.out.println("The Contact first name is : " +firstname);
             System.out.println("The Contact last name  is : " +lastname);
             System.out.println("The Contact address is  : " +address);
@@ -89,6 +122,7 @@ public class Contact{
             System.out.println("The Contact zip is : " +zip);
             System.out.println("The Contact Phone no is : " +phoneno);
             System.out.println("The Contact email is : " +email);
+            System.out.println("\n_________________________________________________\n");
             return "";
         }
     }
