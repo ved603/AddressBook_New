@@ -1,3 +1,4 @@
+
 package org.example;
 
 import java.util.ArrayList;
@@ -11,6 +12,15 @@ public class AddressBook {
     ArrayList<Contact> contacts = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     public void add_Contact(String firstname, String lastname, String address, String city, String state, String zip, String phoneno, String email){
+        boolean isPresent = contacts.stream().anyMatch(num -> num.getFirstname().equals(firstname));
+        if(isPresent){
+            System.out.println("\nContact Person Already Exist");
+        }
+        else {
+            Contact con = new Contact(firstname, lastname, address, city, state, zip, phoneno, email);
+            contacts.add(con);
+            System.out.println(con);
+        }
         Contact con = new Contact(firstname,lastname,address,city,state,zip,phoneno,email);
         contacts.add(con);
         System.out.println(con);
@@ -25,8 +35,13 @@ public class AddressBook {
 
                 System.out.println("\nSelect Operation\n");
                 System.out.println("1. Edit FirstName \n2. Edit LastName \n3.Edit Address \n4.Edit city \n5. Edit State \n6.Edit Zip-code \n7.Edit Phone-Number \n8.Edit Email \n9.Edit All");
+                System.out.print("\nEnter your choice : ");
+                String choice = sc.nextLine();
+                System.out.println();
+
                 System.out.print("\nEnter your choice : \n");
                 String choice = sc.nextLine();
+
                 switch (choice){
                     case "1":
                         System.out.print("Enter your First Name : ");
@@ -154,10 +169,20 @@ public class AddressBook {
         Main m = new Main();
         Boolean running = true;
         while(running) {
+
+            System.out.println("\n____________________________________________________");
+            System.out.println("\nSelect an Operation\n");
+            System.out.println("______________________________________________________\n");
+            System.out.println("1. Add contact \n2. Edit Contact \n3. View Contact \n4. Delete Contact \n5. <- Back ");
+            System.out.print("\nEnter your choice : ");
+            String choice = sc.nextLine();
+            System.out.println("\n_______________________________________________________\n");
+
             System.out.println("\nSelect an Operation\n");
             System.out.println("1. Add contact \n2. Edit Contact \n3. View Contact \n4. Delete Contact \n5. <- Back ");
             System.out.print("\nEnter your choice : \n");
             String choice = sc.nextLine();
+
             switch (choice) {
                 case "1":
                     System.out.print("Enter How Many contacts You want to insert : ");
