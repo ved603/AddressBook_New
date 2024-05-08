@@ -139,6 +139,59 @@ class Main {
         }
     }
 
+    public static void sort_by_City() {
+        List<Contact> allContacts = books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getCity)) // Sort contacts alphabetically by name
+                .collect(Collectors.toList());
+
+        if (allContacts.isEmpty()) {
+            System.out.println("No contacts found in any address book.");
+        } else {
+            System.out.println("Number of contacts found across all address books: " + allContacts.size());
+            for(int i=0;i< allContacts.size();i++){
+                System.out.println(allContacts.get(i));
+            };
+        }
+    }
+
+
+    public static void sort_by_Zip() {
+        List<Contact> allContacts = books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getZip)) // Sort contacts alphabetically by name
+                .collect(Collectors.toList());
+
+        if (allContacts.isEmpty()) {
+            System.out.println("No contacts found in any address book.");
+        } else {
+            System.out.println("Number of contacts found across all address books: " + allContacts.size());
+            for(int i=0;i< allContacts.size();i++){
+                System.out.println(allContacts.get(i));
+            };
+        }
+    }
+
+
+
+    public static void sort_by_State() {
+        List<Contact> allContacts = books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getState)) // Sort contacts alphabetically by name
+                .collect(Collectors.toList());
+
+        if (allContacts.isEmpty()) {
+            System.out.println("No contacts found in any address book.");
+        } else {
+            System.out.println("Number of contacts found across all address books: " + allContacts.size());
+            for(int i=0;i< allContacts.size();i++){
+                System.out.println(allContacts.get(i));
+            };
+        }
+    }
+
+
+
     public static void menu(){
         System.out.println("\n_____________________________________________");
         System.out.println("\n\t\t*** Welcome to AddressBook ***\t\t");
@@ -229,7 +282,31 @@ class Main {
 
 
                 case "6":
-                    sort_by_Name();
+                    System.out.println("\n________________________________________________");
+                    System.out.println("\n1. By Name \n2. By City \n3. By Zip \n4. By State");
+                    System.out.print("Enter your choice : ");
+                    String choice3 = sc.nextLine();
+                    switch(choice3){
+                        case "1":
+                            sort_by_Name();
+                            break;
+
+                        case "2":
+                            sort_by_City();
+                            break;
+
+                        case "3":
+                            sort_by_Zip();
+                            break;
+
+                        case "4":
+                            sort_by_State();
+                            break;
+
+                        default:
+                            System.out.println("\nInvalid Input");
+                            break;
+                    }
                     break;
 
                 case "7":
