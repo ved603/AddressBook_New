@@ -1,7 +1,9 @@
 package org.example;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 
 class Main {
@@ -9,12 +11,52 @@ class Main {
 
    static  HashMap <String,AddressBook> books = new HashMap<>();
     static Scanner sc = new Scanner(System.in);
+    static HashMap<String,List<Contact>> cityPerson = new HashMap<>();
+
+    static HashMap<String,List<Contact>> statePerson = new HashMap<>();
 
 
     public static void add_AddressBook(String name){
         books.put(name,new AddressBook());
         System.out.println("\n\t*** The AddressBook is Added Successfully ***\t");
     }
+
+
+    public static void view_by_city(){
+        System.out.print("Enter the City Name to Search : ");
+        String city = sc.nextLine();
+        if(cityPerson.isEmpty()){
+            System.out.println("The Given City is Not FOund");
+        }
+
+        else {
+            cityPerson.forEach((key,value) -> {
+                for (Contact contact : value) {
+                    if (contact.getCity().equals(city)) {
+                        System.out.println(contact);
+                    }
+                }
+            });
+        }
+    }
+
+    public static void view_by_state(){
+        System.out.println("Enter the state Name to Search : ");
+        String state = sc.nextLine();
+        if(statePerson.isEmpty()){
+            System.out.println("The Given State is Not Found");
+        }
+        else{
+            cityPerson.forEach((key,value) -> {
+                for (Contact contact : value) {
+                    if (contact.getCity().equals(state)) {
+                        System.out.println(contact);
+                    }
+                }
+            });
+        }
+    }
+
 
     public static void search_by_city(){
 //        System.out.println("Enter the City Name to Search : ");
@@ -34,10 +76,16 @@ class Main {
                 .filter(contact -> contact.getCity().equals(city))
                 .count();
         System.out.println("Number of contacts found in " + city + ": " + count);
-        books.values().stream()
+        cityPerson.put(city,books.values().stream()
                 .flatMap(book -> book.getContacts().stream())
                 .filter(contact -> contact.getCity().equals(city))
-                .forEach(System.out::println);
+                .collect(Collectors.toList()));
+        if(cityPerson.isEmpty()){
+            System.out.println("The City is Not Available in the AddressBooks");
+        }
+        else{
+            System.out.println("Number of contacts found in " + city + ": " + count);
+        }
     }
 
 
@@ -48,11 +96,17 @@ class Main {
                 .flatMap(book -> book.getContacts().stream())
                 .filter(contact -> contact.getCity().equals(state))
                 .count();
-        System.out.println("Number of contacts found in " + state + ": " + count);
-        books.values().stream()
+        statePerson.put(state,books.values().stream()
                 .flatMap(book -> book.getContacts().stream())
                 .filter(contact -> contact.getCity().equals(state))
-                .forEach(System.out::println);
+                .collect(Collectors.toList()));
+
+        if(statePerson.isEmpty()){
+            System.out.println("The state is Not Available in the AddressBooks");
+        }
+        else{
+            System.out.println("Number of contacts found in " + state + ": " + count);
+        }
     }
 
     public static void menu(){
@@ -61,7 +115,7 @@ class Main {
         System.out.println("\n______________________________________________");
         boolean res = true;
         while(res) {
-            System.out.println("\n1. Add New AddressBook \n2. Perform Operation in AddressBook  \n3. Search by city \n4. Print Available AddressBooks \n5. Exist");
+            System.out.println("\n1. Add New AddressBook \n2. Perform Operation in AddressBook  \n3. Search by city \n4. View Person dictionary \n5. Print Available AddressBooks \n6. Exist");
             System.out.print("\nEnter your choice : ");
             String flag = sc.nextLine();
             switch (flag) {
@@ -101,11 +155,32 @@ class Main {
                     }
                     break;
 
+
                 case "4":
-                    System.out.println("\nPrinting the Names of AddressBooks : " +books.keySet());
+                    System.out.println("\n________________________________________________");
+                    System.out.println("\n1. view by City \n2. view by State");
+                    System.out.print("Enter your choice : ");
+                    String choice1 = sc.nextLine();
+                    switch(choice1){
+                        case "1":
+                            view_by_city();
+                            break;
+
+                        case "2":
+                            view_by_state();
+                            break;
+
+                        default:
+                            System.out.println("\nInvalid Input");
+                            break;
+                    }
                     break;
 
                 case "5":
+                    System.out.println("\nPrinting the Names of AddressBooks : " +books.keySet());
+                    break;
+
+                case "6":
                     System.exit(0);
 
                 default:
@@ -114,7 +189,7 @@ class Main {
             }
         }
     }
-    public static void main(String[] args) {
+    public static void main(String args[]) {
 //        Main m = new Main();
         menu();
 

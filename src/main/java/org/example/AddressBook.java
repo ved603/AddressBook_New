@@ -3,17 +3,22 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static org.example.Main.*;
 
 public class AddressBook {
     ArrayList<Contact> contacts = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
+    public List<Contact> persons = new ArrayList<>();
 
     public ArrayList<Contact> getContacts() {
+
         return contacts;
     }
+
     public void add_Contact(String firstname, String lastname, String address, String city, String state, String zip, String phoneno, String email){
         boolean isPresent = contacts.stream().anyMatch(num -> num.getFirstname().equals(firstname));
         if(isPresent){
@@ -158,6 +163,19 @@ public class AddressBook {
                 System.out.println(contacts.get(i));
             }
         }
+    }
+    public List<Contact> getPersonsByCity(String city) {
+        return persons.stream()
+                .filter(persons -> persons.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList());
+
+    }
+
+
+    public List<Contact> getPersonsByState(String state) {
+        return contacts.stream()
+                .filter(contact -> contact.getState().equalsIgnoreCase(state))
+                .collect(Collectors.toList());
     }
 
 
