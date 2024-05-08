@@ -1,8 +1,5 @@
 package org.example;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -44,7 +41,7 @@ class Main {
         System.out.print("Enter the City Name to Search : ");
         String city = sc.nextLine();
         if(cityPerson.isEmpty()){
-            System.out.println("The Given City is Not FOund");
+            System.out.println("The Given City is Not Found");
         }
 
         else {
@@ -126,25 +123,29 @@ class Main {
             System.out.println("Number of contacts found in " + state + ": " + count);
         }
     }
+    public static void sort_by_Name() {
+        List<Contact> allContacts = books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getFirstname)) // Sort contacts alphabetically by name
+                .collect(Collectors.toList());
 
-
-    public static void count(){
-        System.out.println("\n1. Count of Contacts with particular city \n2. Count of Contacts with particular State");
-        String choice2 = sc.nextLine();
-        switch(choice2){
-            case "1":
-
+        if (allContacts.isEmpty()) {
+            System.out.println("No contacts found in any address book.");
+        } else {
+            System.out.println("Number of contacts found across all address books: " + allContacts.size());
+            for(int i=0;i< allContacts.size();i++){
+                System.out.println(allContacts.get(i));
+            };
         }
     }
+
     public static void menu(){
         System.out.println("\n_____________________________________________");
         System.out.println("\n\t\t*** Welcome to AddressBook ***\t\t");
         System.out.println("\n______________________________________________");
         boolean res = true;
         while(res) {
-
-            System.out.println("\n1. Add New AddressBook \n2. Perform Operation in AddressBook  \n3. Search by city \n4. View Person dictionary \n5. Count the Contact Persons \n6. Print Available AddressBooks \n7. Exist");
-
+            System.out.println("\n1. Add New AddressBook \n2. Perform Operation in AddressBook  \n3. Search by city \n4. View Person dictionary \n5. Count the Contact Persons \n6 Sort Contacts by Name \n7. Print Available AddressBooks \n8. Exist");
             System.out.print("\nEnter your choice : ");
             String flag = sc.nextLine();
             switch (flag) {
@@ -226,11 +227,16 @@ class Main {
                     }
                     break;
 
+
                 case "6":
-                    System.out.println("\nPrinting the Names of AddressBooks : " +books.keySet());
+                    sort_by_Name();
                     break;
 
                 case "7":
+                    System.out.println("\nPrinting the Names of AddressBooks : " +books.keySet());
+                    break;
+
+                case "8":
                     System.exit(0);
 
                 default:
