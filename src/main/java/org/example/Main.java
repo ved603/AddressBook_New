@@ -22,6 +22,24 @@ class Main {
     }
 
 
+
+    public static void count_by_city(){
+        System.out.println("Enter the city Name to Search : ");
+        String city = sc.nextLine();
+        long count = books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .filter(contact -> contact.getCity().equals(city))
+                .count();
+    }
+
+    public static void count_by_state(){
+        System.out.println("Enter the state Name to Search : ");
+        String state = sc.nextLine();
+        long count = books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .filter(contact -> contact.getCity().equals(state))
+                .count();
+    }
     public static void view_by_city(){
         System.out.print("Enter the City Name to Search : ");
         String city = sc.nextLine();
@@ -109,13 +127,22 @@ class Main {
         }
     }
 
+
+    public static void count(){
+        System.out.println("\n1. Count of Contacts with particular city \n2. Count of Contacts with particular State");
+        String choice2 = sc.nextLine();
+        switch(choice2){
+            case "1":
+
+        }
+    }
     public static void menu(){
         System.out.println("\n_____________________________________________");
         System.out.println("\n\t\t*** Welcome to AddressBook ***\t\t");
         System.out.println("\n______________________________________________");
         boolean res = true;
         while(res) {
-            System.out.println("\n1. Add New AddressBook \n2. Perform Operation in AddressBook  \n3. Search by city \n4. View Person dictionary \n5. Print Available AddressBooks \n6. Exist");
+            System.out.println("\n1. Add New AddressBook \n2. Perform Operation in AddressBook  \n3. Search by city \n4. View Person dictionary \n5. Count the Contact Persons \n6. Print Available AddressBooks \n7. Exist");
             System.out.print("\nEnter your choice : ");
             String flag = sc.nextLine();
             switch (flag) {
@@ -176,11 +203,32 @@ class Main {
                     }
                     break;
 
+
                 case "5":
-                    System.out.println("\nPrinting the Names of AddressBooks : " +books.keySet());
+                    System.out.println("\n________________________________________________");
+                    System.out.println("\n1. count by City \n2. count by State");
+                    System.out.print("Enter your choice : ");
+                    String choice2 = sc.nextLine();
+                    switch(choice2){
+                        case "1":
+                            count_by_city();
+                            break;
+
+                        case "2":
+                            count_by_state();
+                            break;
+
+                        default:
+                            System.out.println("\nInvalid Input");
+                            break;
+                    }
                     break;
 
                 case "6":
+                    System.out.println("\nPrinting the Names of AddressBooks : " +books.keySet());
+                    break;
+
+                case "7":
                     System.exit(0);
 
                 default:
@@ -189,7 +237,7 @@ class Main {
             }
         }
     }
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 //        Main m = new Main();
         menu();
 
